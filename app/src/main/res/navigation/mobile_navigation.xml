@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_teams">
+
+    <fragment
+        android:id="@+id/navigation_teams"
+        android:name="com.example.wclaproject.ui.teams.TeamsFragment"
+        android:label="@string/title_teams"
+        tools:layout="@layout/teams_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_standings"
+        android:name="com.example.wclaproject.ui.standings.StandingsFragment"
+        android:label="@string/title_standings"
+        tools:layout="@layout/standings_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_stats"
+        android:name="com.example.wclaproject.ui.stats.StatsFragment"
+        android:label="@string/title_stats"
+        tools:layout="@layout/stats_fragment" />
+
+</navigation>
