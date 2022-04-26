@@ -33,9 +33,9 @@ public class TeamAdapter extends ArrayAdapter<TeamModel> {
         teamNameView.setText(courseModel.getTeam_name());
 
         TextView teamDescView = listItemView.findViewById(R.id.cardDesc);
-        teamDescView.setText(courseModel.getTeam_short_name());
+        teamDescView.setText(courseModel.getTeam_region());
 
-        System.out.println(courseModel.getTeam_short_name());
+        System.out.println(courseModel.getTeam_city());
 
 
 

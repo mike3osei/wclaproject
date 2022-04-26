@@ -16,27 +16,39 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/listCardText"
+            android:id="@+id/listCardRank"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
 
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:textColor="@color/teal_700"
             android:layout_marginRight="15dp"
-            android:text="@string/app_name" />
+            android:text="1" />
 
         <TextView
-            android:id="@+id/listCardDesc"
+            android:id="@+id/listCardName"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
 
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textSize="15dp"
+            android:layout_weight="1"
+
             android:textColor="@color/black"
-            android:text="@string/app_name"
+            android:text="UCLA University"
             android:layout_below="@+id/app_name"
-            android:textAlignment="center" />
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/listCardStanding"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:text="@string/app_name"
+            android:textAlignment="textEnd"
+            android:textColor="@color/teal_700"
+            android:textSize="15dp" />
+
 
     </LinearLayout>
 

@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.wclaproject.ui.teams.viewteams.ViewTeam">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_show_coach"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_menu_coach"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_stadium"
+        android:orderInCategory="100"
+        android:title="@string/action_menu_stadium"
         app:showAsAction="never" />
 </menu>

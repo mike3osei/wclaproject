@@ -8,11 +8,9 @@
     tools:context=".ui.teams.viewteams.ViewTeam"
     tools:showIn="@layout/team_view_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="200dp"
-        android:text="@string/large_text" />
+    <ListView
+        android:id = "@+id/playersTeamsList"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"/>
+
 </androidx.core.widget.NestedScrollView>

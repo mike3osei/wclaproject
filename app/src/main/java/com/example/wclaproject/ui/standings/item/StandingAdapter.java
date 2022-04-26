@@ -29,13 +29,15 @@ public class StandingAdapter extends ArrayAdapter<StandingModel> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_card_item, parent, false);
         }
 
-        StandingModel courseModel = getItem(position);
-        TextView teamNameView = listItemView.findViewById(R.id.listCardText);
-        teamNameView.setText(courseModel.getRank());
+        StandingModel standingModel = getItem(position);
+        TextView teamRankView = listItemView.findViewById(R.id.listCardRank);
+        teamRankView.setText(Integer.toString(position+1));
 
-        TextView teamDescView = listItemView.findViewById(R.id.listCardDesc);
-        teamDescView.setText(courseModel.getName());
+        TextView teamNameView = listItemView.findViewById(R.id.listCardName);
+        teamNameView.setText(standingModel.getTeam());
 
+        TextView teamStandingsView = listItemView.findViewById(R.id.listCardStanding);
+        teamStandingsView.setText(standingModel.getRecord());
 
         return listItemView;
     }

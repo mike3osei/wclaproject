@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WCLAProject">
         <activity
+            android:name=".ui.teams.createResult.CreateResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.teams.viewteams.ViewTeam"
             android:exported="false"
             android:label="@string/title_activity_view_team"

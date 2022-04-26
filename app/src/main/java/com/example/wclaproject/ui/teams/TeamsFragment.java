@@ -1,6 +1,8 @@
 package com.example.wclaproject.ui.teams;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.wclaproject.database.constant.SQLCommand;
+import com.example.wclaproject.database.util.DBOperator;
 import com.example.wclaproject.databinding.TeamsFragmentBinding;
+import com.example.wclaproject.ui.teams.createResult.CreateResultActivity;
 import com.example.wclaproject.ui.teams.items.TeamAdapter;
 import com.example.wclaproject.ui.teams.items.TeamModel;
 import com.example.wclaproject.ui.teams.viewteams.ViewTeam;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -24,52 +30,27 @@ import java.util.ArrayList;
 public class TeamsFragment extends Fragment {
     private TeamsFragmentBinding binding;
     GridView teamsGridView;
+    FloatingActionButton fab;
+
+    String sql="";
+    ArrayList<TeamModel> teamArrayList;
+    Cursor cursor;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = TeamsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        teamArrayList = new ArrayList<TeamModel>();
         teamsGridView = binding.allTeamsGrid;
-        ArrayList<TeamModel> teamArrayList = new ArrayList<TeamModel>();
-        teamArrayList.add(new TeamModel("Worcester Polytechnic Institute", "Engineers"));
-        teamArrayList.add(new TeamModel("Providence College", "Friars"));
-        teamArrayList.add(new TeamModel("Worcester State", "Bears"));
-        teamArrayList.add(new TeamModel("Umass Lowell", "Grizzlies"));
-        teamArrayList.add(new TeamModel("Clark University", "Rabbits"));
-        teamArrayList.add(new TeamModel("Assumption College", "Bulldogs"));
-        teamArrayList.add(new TeamModel("Syracuse University", "Lions"));
-        teamArrayList.add(new TeamModel("University of New Hampshire", "Sharks"));
-        teamArrayList.add(new TeamModel("University of Conneticut", "Huskies"));
-        teamArrayList.add(new TeamModel("Becker College", "Heat"));
-        teamArrayList.add(new TeamModel("Holy Cross College", "Dolphins"));
-        teamArrayList.add(new TeamModel("Umass Lowell", "Grizzlies"));
-        teamArrayList.add(new TeamModel("Clark University", "Rabbits"));
-        teamArrayList.add(new TeamModel("Assumption College", "Bulldogs"));
-        teamArrayList.add(new TeamModel("Syracuse University", "Lions"));
-        teamArrayList.add(new TeamModel("University of New Hampshire", "Sharks"));
-        teamArrayList.add(new TeamModel("University of Conneticut", "Huskies"));
-        teamArrayList.add(new TeamModel("Becker College", "Heat"));
-        teamArrayList.add(new TeamModel("Holy Cross College", "Dolphins"));
-        teamArrayList.add(new TeamModel("Umass Lowell", "Grizzlies"));
-        teamArrayList.add(new TeamModel("Clark University", "Rabbits"));
-        teamArrayList.add(new TeamModel("Assumption College", "Bulldogs"));
-        teamArrayList.add(new TeamModel("Syracuse University", "Lions"));
-        teamArrayList.add(new TeamModel("University of New Hampshire", "Sharks"));
-        teamArrayList.add(new TeamModel("University of Conneticut", "Huskies"));
-        teamArrayList.add(new TeamModel("Becker College", "Heat"));
-        teamArrayList.add(new TeamModel("Holy Cross College", "Dolphins"));
+        //DBOperator.getInstance().execSQL(SQLCommand.initDb);
 
-
-
-        TeamAdapter adapter = new TeamAdapter(binding.allTeamsGrid.getContext(), teamArrayList);
-        teamsGridView.setAdapter(adapter);
+        fetchTeams();
 
         teamsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-
                 TeamModel team = teamArrayList.get(position);
                 Intent openTeamIntent = new Intent(getActivity(), ViewTeam.class);
                 Gson gson = new Gson();
@@ -79,7 +60,49 @@ public class TeamsFragment extends Fragment {
             }
         });
 
+        fab = binding.fab;
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openResultIntent = new Intent(getActivity(), CreateResultActivity.class);
+                startActivity(openResultIntent);
+            }
+        });
+
         return root;
+    }
+
+    public void fetchTeams(){
+        sql = SQLCommand.fetchAllTeams;
+        cursor = DBOperator.getInstance().execQuery(sql);
+
+
+        if (cursor != null) {
+            System.out.println("ALL TEAMS");
+
+            // move cursor to first row
+            System.out.println("Cursor Object: " + DatabaseUtils.dumpCursorToString(cursor));
+
+            if (cursor.moveToFirst()) {
+                do {
+                    teamArrayList.add(new TeamModel(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getString(5),
+                            cursor.getString(6),
+                            cursor.getString(7)
+                    ));
+                } while (cursor.moveToNext());
+            }
+            System.out.println("ALL TEAMS");
+        }
+
+        TeamAdapter adapter = new TeamAdapter(binding.allTeamsGrid.getContext(), teamArrayList);
+        teamsGridView.setAdapter(adapter);
     }
 
     @Override

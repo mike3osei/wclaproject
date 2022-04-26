@@ -30,10 +30,10 @@ public class StatsAdapter extends ArrayAdapter<StatsModel> {
         }
 
         StatsModel courseModel = getItem(position);
-        TextView teamNameView = listItemView.findViewById(R.id.listCardText);
+        TextView teamNameView = listItemView.findViewById(R.id.listCardName);
         teamNameView.setText(courseModel.getRank());
 
-        TextView teamDescView = listItemView.findViewById(R.id.listCardDesc);
+        TextView teamDescView = listItemView.findViewById(R.id.listCardRank);
         teamDescView.setText(courseModel.getName());
 
 
